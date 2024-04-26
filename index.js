@@ -7,7 +7,20 @@ for(var i=0;i<numberOfButtons;i++)
 function handleClick()
 {   
     var buttonInnerHTML = this.innerHTML;
-    switch(buttonInnerHTML)
+    makeSound(buttonInnerHTML);
+    butttonAnimation(buttonInnerHTML);
+    
+   
+}
+document.addEventListener("keydown",function(event)
+{
+    makeSound(event.key);
+    butttonAnimation(event.key);
+})
+
+function makeSound(key)
+{
+    switch(key)
     {
         case "w":
             var audio = new Audio('sounds/tom-1.mp3');
@@ -40,6 +53,14 @@ function handleClick()
         default:
             console.log(buttonInnerHTML)
     }
-   
 }
+function butttonAnimation(currentKey)
+{
+    var activeButton = document.querySelector("."+currentKey);
+    activeButton.classList.add("pressed");
 
+    setTimeout(function()
+    {
+        activeButton.classList.remove("pressed");
+    },100);
+}
